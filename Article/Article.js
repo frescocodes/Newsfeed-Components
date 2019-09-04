@@ -113,7 +113,9 @@ const data = [
 
 */
 
-function createArticles(data) {
+data.map()
+
+function createArticles(title, date, content) {
   // create elements
   const article = document.createElement('div');
   const h2 = document.createElement('h2');
@@ -127,7 +129,27 @@ function createArticles(data) {
   date.classList.add('date');
   expandButton.classList.add('expandButton');
   // structure elements
-
+  article.appendChild(h2);
+  article.appendChild(date);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
+  article.appendChild(expandButton);
+  // content
+  h2.textContent = title;
+  date.textContent = date;
+  expandButton.textContent = 'Read more...'
+  // event listeners
+  expandButton.addEventListener('click', event => {
+    article.classList.toggle('article-open')
+  });
 }
+
+
+const articles = document.querySelector('.articles');
+console.log(articles);
+data.forEach(data => {
+  articles.appendChild(createArticles(data))
+})
 
 
