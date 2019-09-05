@@ -34,6 +34,8 @@ let menuItems = [
   
 */
 const menuButton = document.querySelector('.menu-button');
+const header = document.getElementsByClassName('.header');
+console.log(header);
 
 function createMenu (data) {
   //create elements
@@ -59,4 +61,4 @@ function createMenu (data) {
 }
 
 const menu = createMenu(menuItems);
-document.body.appendChild(menu);
+document.querySelector('div').appendChild(menu);
