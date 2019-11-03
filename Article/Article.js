@@ -85,7 +85,16 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
-  }
+  },
+  {
+    title: 'Paradigm 2070 Shift',
+    date: 'October 5th, 2013',
+    firstParagraph: `What inspires you? What inspires you? What inspires you? I want an answer, what inspires you? [Person in crowd responds] You better find something man. [Person in crowd says “The possibilities”] Don’t worry about it. [Clears throughts] “Possibilities…” Um… What inspires me is teaching African refugees how to program Javascript. What inspires me is finding out how to use maglev trains to get resources to the moon! These are the challenges of tom-that tomorrow’s gonna face. Okay? How are we gonna get clean drinking water to 2 billion Chinese people? Ya got an answer? Get inspired.`,
+
+    secondParagraph: `You’ll know what I’m talking about if you’ve seen the movie “An Inconvenient Truth”. It’s essentially what’s going on is we’re too selfish, and we’re driving our cars too much, and that’s getting nature out of the picture. Now we looked at the data, we looked at the data, and what we found surprised us. What we found, right there, what we found was that culture is a sewer. We’ve got lewd media. We’ve got nasty bedroom things on TV. And they’re sexualizing young girls, and it’s getting to the point where even I have a problem with it. And that- it shouldn’t be that way. Folks, we’re all world citizens.`,
+
+    thirdParagraph: `Now, 2070. Due to the massive birth increase, we’re gonna have a shortage of milk. What this means is, the neo-earth-good-government-league is gonna have to genetically modify all humans, male and female, to lactate once a month. Once every month, you’re gonna be going to a lactation processing center where they’ll hook ya up to all kinds of weird things. Uh, now, due to some fluke, about 3% of the population produces milk, uh, about 500% as much milk. So they’re gonna have to be farmed constantly. And it’s very painful, but they’re gonna be rounded up by FEMA and their milk will serve the greater good. Guys, what’s the one problem right now that’s not gonna be around in 2070? The elderly and the disabled. Cuz we’re just GONNA KILL EM! WE’RE JUST GONNA KILL EM!`
+  },
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
@@ -101,14 +110,57 @@ const data = [
 
   Hint: You will need to use createElement more than once here!
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+  Your function should take either an object as its one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
   Step 3: return the entire component.
 
-  Step 4: Map over the data, creating a component for each oject and add each component to the DOM as children of the 'articles' div.
+  Step 4: Map over the data, creating a component for each object and add each component to the DOM as children of the 'articles' div.
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+
+const articles = document.querySelector('.articles');
+console.log(articles);
+
+function createArticles(heading, dates, text1, text2, text3) {
+  // create elements
+  const article = document.createElement('div');
+  const articleHeading = document.createElement('h2');
+  const articleDate = document.createElement('p');
+  const p1 = document.createElement('p');
+  const p2 = document.createElement('p');
+  const p3 = document.createElement('p');
+  const expandButton = document.createElement('span');
+  // assign classes
+  article.classList.add('article');
+  articleDate.classList.add('date');
+  expandButton.classList.add('expandButton');
+  // structure elements
+  article.appendChild(articleHeading);
+  article.appendChild(articleDate);
+  article.appendChild(p1);
+  article.appendChild(p2);
+  article.appendChild(p3);
+  article.appendChild(expandButton);
+  // content
+  articleHeading.textContent = heading;
+  articleDate.textContent = dates;
+  expandButton.textContent = 'Read more...'
+  p1.textContent = text1;
+  p2.textContent = text2;
+  p3.textContent = text3;
+  // event listeners
+  expandButton.addEventListener('click', event => {
+    article.classList.toggle('article-open')
+  });
+
+  return article;
+}
+
+data.forEach(e => {
+  articles.appendChild(createArticles(e.title, e.date, e.firstParagraph, e.secondParagraph, e.thirdParagraph));
+})
+
